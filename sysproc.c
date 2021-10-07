@@ -90,6 +90,15 @@ sys_uptime(void)
   return xticks;
 }
 
+int
+sys_waitS(void)
+{
+  struct proc *p = myproc();
+  int* status;
+  *status = p->exitStatus;
+  return waitS(status)
+}
+
 //lab 1
 /*
 int

@@ -274,7 +274,7 @@ exitS(int status)
   struct proc *p;
   int fd;
 
-  curproc->status = status; //maybe p instead of curproc
+  curproc->exitStatus = status; //maybe p instead of curproc
   if(curproc == initproc)
     panic("init exiting");
 
@@ -381,6 +381,7 @@ waitS(int* status)
         p->name[0] = 0;
         p->killed = 0;
         p->state = UNUSED;
+        *status = p->exitStatus;
         release(&ptable.lock);
         return pid;
       }
