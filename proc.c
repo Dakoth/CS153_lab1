@@ -274,6 +274,7 @@ exitS(int status)
   struct proc *p;
   int fd;
 
+  curproc->status = status; //maybe p instead of curproc
   if(curproc == initproc)
     panic("init exiting");
 
@@ -308,7 +309,7 @@ exitS(int status)
   curproc->state = ZOMBIE;
   sched();
   panic("zombie exit");
-}
+} //Lab 1
 
 // Wait for a child process to exit and return its pid.
 // Return -1 if this process has no children.
@@ -394,7 +395,7 @@ waitS(int* status)
     // Wait for children to exit.  (See wakeup1 call in proc_exit.)
     sleep(curproc, &ptable.lock);  //DOC: wait-sleep
   }
-}
+}// Lab 1
 
 //PAGEBREAK: 42
 // Per-CPU process scheduler.
