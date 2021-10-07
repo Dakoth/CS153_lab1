@@ -128,6 +128,7 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 
 //[SYS_exits] sys_exits, //Lab 1 
+//lol bruh 
 };
 
 void
