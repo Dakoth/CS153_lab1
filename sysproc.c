@@ -89,3 +89,13 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+//lab 1
+/*
+int
+sys_exits(void)
+{
+  exits();
+  return 0;  // not reached
+}
+*/
