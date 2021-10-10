@@ -20,4 +20,5 @@
 #define SYS_link   19
 #define SYS_mkdir  20
 #define SYS_close  21
-#define SYS_waitS 23
+#define SYS_exitS  22  //lab 1
+#define SYS_waitS  23

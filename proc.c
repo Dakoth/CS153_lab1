@@ -267,6 +267,7 @@ exit(void)
   panic("zombie exit");
 }
 
+///LAB 1 
 void
 exitS(int status)
 {
@@ -355,6 +356,8 @@ wait(void)
   }
 }
 
+
+//LAB 1 
 int
 waitS(int* status)
 {

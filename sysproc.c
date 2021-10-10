@@ -90,21 +90,32 @@ sys_uptime(void)
   return xticks;
 }
 
+//lab 1
+
+int
+sys_exitS(void)
+{
+  int exitStatus;
+
+  if (argint(0, &exitStatus) < 0) { //verifies it's within user add space(?)
+      return -1;      
+  }
+  
+   exitS(exitStatus);      //not sure if this is correct
+
+   return 0;  // not reached
+}
+
+
+
 int
 sys_waitS(void)
 {
   struct proc *p = myproc();
   int* status;
   *status = p->exitStatus;
-  return waitS(status)
+
+  argptr(0, (void*)&status, sizeof(status)); // need to see if valid user-space ptr
+  return waitS(status);
 }
 
-//lab 1
-/*
-int
-sys_exits(void)
-{
-  exits();
-  return 0;  // not reached
-}
-*/
