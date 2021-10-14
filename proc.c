@@ -628,8 +628,58 @@ procdump(void)
 }
 
 
-
+//Lab 1 
+//Waits for process with the given pid that's given by argument
+// returns pid of process or error (-1)
 int waitpid(int pid, int *status, int options) {
 
-  return 0;
+  struct proc *p;
+  //int havekids, pid;
+
+  int foundPID;  //like havekids
+  struct proc *curproc = myproc();
+  
+  acquire(&ptable.lock);
+  for(;;){
+    // Scan through table looking for exited children.
+    //havekids = 0;
+
+    foundPID = 0;
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+
+      //if the pid of the process doesn't match the given one, exit process
+      if(p->pid != pid)
+        continue;
+      //havekids = 1;
+
+      foundPID = 1; //if gets here, then matching pid found
+      if(p->state == ZOMBIE){
+        // Found one.
+        //pid = p->pid;
+        kfree(p->kstack);
+        p->kstack = 0;
+        freevm(p->pgdir);
+        p->pid = 0;
+        p->parent = 0;
+        p->name[0] = 0;
+        p->killed = 0;
+        p->state = UNUSED;
+
+        if (status) {*status = p->exitStatus;}
+
+        //p->exitStatus = 0?
+        release(&ptable.lock);
+        return pid;
+      }
+    }
+
+    //no need to wait if pid doesn't exist or current proccess killed
+    if(!foundPID || curproc->killed){
+      release(&ptable.lock);
+      return -1;
+    }
+
+    // Wait for children to exit.  (See wakeup1 call in proc_exit.)
+    sleep(curproc, &ptable.lock);  //DOC: wait-sleep
+  }
 }

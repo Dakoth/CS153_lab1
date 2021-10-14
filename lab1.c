@@ -60,7 +60,7 @@ int exitWait(void) {
 
 
 int waitPid(void){
-	/*
+	//
   int ret_pid, exit_status;
   int i;
   int pid_a[5]={0, 0, 0, 0, 0};
@@ -96,14 +96,14 @@ int waitPid(void){
       printf(1, "\n This is the parent: Now waiting for child with PID# %d\n",pid_a[4]);
       ret_pid = waitpid(pid_a[4], &exit_status, 0);
       printf(1, "\n This is the partent: Child# %d has exited with status %d\n",ret_pid, exit_status);
-      */
+      //*/
       return 0;
   }
 
 int CELEBW02(void){
 	
  printf(1, "\n  Part e) the waitpid option WNOHANG, test program CELEBW02 \n");
-/*
+///*
   int pid, retpid;
   int status;
 
@@ -126,7 +126,7 @@ int CELEBW02(void){
   } while (retpid == 0);
   
 
-  */
+  //*/
   return 0;
   
   }
