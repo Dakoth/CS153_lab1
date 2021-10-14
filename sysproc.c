@@ -101,9 +101,9 @@ sys_exitS(void)
       return -1;      
   }
   
-   exitS(exitStatus);      //not sure if this is correct
+  exitS(exitStatus);      //not sure if this is correct
 
-   return 0;  // not reached
+  return 0;  // not reached
 }
 
 
@@ -111,9 +111,9 @@ sys_exitS(void)
 int
 sys_waitS(void)
 {
-  struct proc *p = myproc();
+  //struct proc *p = myproc();
   int* status;
-  *status = p->exitStatus;
+  //*status = p->exitStatus;
 
   argptr(0, (void*)&status, sizeof(status)); // need to see if valid user-space ptr
   return waitS(status);

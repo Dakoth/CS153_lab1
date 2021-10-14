@@ -275,7 +275,8 @@ exitS(int status)
   struct proc *p;
   int fd;
 
-  curproc->exitStatus = status; //maybe p instead of curproc
+  curproc->exitStatus = status; //maybe p instead of curproc LAB 1
+
   if(curproc == initproc)
     panic("init exiting");
 
@@ -305,6 +306,8 @@ exitS(int status)
         wakeup1(initproc);
     }
   }
+
+  //curproc->exitStatus = status; LAB 1
 
   // Jump into the scheduler, never to return.
   curproc->state = ZOMBIE;
@@ -384,7 +387,8 @@ waitS(int* status)
         p->name[0] = 0;
         p->killed = 0;
         p->state = UNUSED;
-        *status = p->exitStatus;
+        if (status) {*status = p->exitStatus;} //needed for some reason
+        
         release(&ptable.lock);
         return pid;
       }
@@ -621,4 +625,11 @@ procdump(void)
     }
     cprintf("\n");
   }
+}
+
+
+
+int waitpid(int pid, int *status, int options) {
+
+  return 0;
 }

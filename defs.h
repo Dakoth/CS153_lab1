@@ -121,7 +121,7 @@ int             wait(void);
 void            wakeup(void*);
 void            yield(void);
 
-void            exitS(int);
+void             exitS(int);
 int             waitS(int*);
 
 // swtch.S
