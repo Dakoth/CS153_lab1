@@ -307,7 +307,7 @@ exitS(int status)
     }
   }
 
-  //curproc->exitStatus = status; LAB 1
+  
 
   // Jump into the scheduler, never to return.
   curproc->state = ZOMBIE;
@@ -667,7 +667,7 @@ int waitpid(int pid, int *status, int options) {
         p->killed = 0;
         p->state = UNUSED;
 
-        //If the not null ptr, then set status to exit status of child
+        //If not nullptr, then set status to exit status of child
         if (status != 0) {*status = p->exitStatus;}
 
         //p->exitStatus = 0?
