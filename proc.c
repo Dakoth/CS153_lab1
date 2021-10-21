@@ -426,8 +426,18 @@ scheduler(void)
     // Enable interrupts on this processor.
     sti();
 
-    // Loop over process table looking for process to run.
+    //LAB 2, we want to find the highest priority process using a similar for loop
     acquire(&ptable.lock);
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+      if(p->state != RUNNABLE) {
+        continue;
+      }
+      //if(p->priority < newprio()) {
+      //  p->priority = newprio();
+      //}
+    }
+    // Loop over process table looking for process to run.
+    
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
