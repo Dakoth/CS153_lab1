@@ -106,6 +106,7 @@ found:
   // which returns to trapret.
   sp -= 4;
   *(uint*)sp = (uint)trapret;
+  p->priority = 10;         //LAB 2
 
   sp -= sizeof *p->context;
   p->context = (struct context*)sp;
