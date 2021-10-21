@@ -407,6 +407,9 @@ waitS(int* status)
   }
 }// Lab 1
 
+
+
+//LAB 2
 //PAGEBREAK: 42
 // Per-CPU process scheduler.
 // Each CPU calls scheduler() after setting itself up.
@@ -695,4 +698,11 @@ int waitpid(int pid, int *status, int options) {
     // Wait for children to exit.  (See wakeup1 call in proc_exit.)
     sleep(curproc, &ptable.lock);  //DOC: wait-sleep
   }
+}
+
+//Lab 2
+//sets the priority of the process that calls this
+int setPriority(int priority) {
+  
+
 }
