@@ -698,6 +698,15 @@ int waitpid(int pid, int *status, int options) {
 //Lab 2
 //sets the priority of the process that calls this
 int setPriority(int priority) {
-  
+    struct proc *curproc = myproc();
+    curproc->priority = priority;
 
+    return 0;
+}
+
+//gets the priority 
+int getPriority() {
+  struct proc *curproc = myproc();
+
+  return curproc->priority; 
 }
