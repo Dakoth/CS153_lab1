@@ -437,7 +437,7 @@ scheduler(void)
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);    
 
-    //if the current prio is larger than the given one, chagne it? //LAB 2 
+    //if the current prio is larger than the given one, change it //LAB 2 
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if (p->state == RUNNABLE && p->priority < lowPrio) {
         lowPrio = p->priority;
@@ -450,17 +450,15 @@ scheduler(void)
       if(p->state != RUNNABLE)
         continue;
 
-      //Handles aging?
-      
-      if(p->priority != lowPrio) {  //LAB 2 
+      //LAB 2 
+      if(p->priority != lowPrio) {  
         //currPrio = p->priority;
         if (p->priority > 0) {
           p->priority--;
         }
-
         continue;
       }
-      //*/
+      //*/s
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
