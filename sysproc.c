@@ -141,3 +141,15 @@ sys_waitpid(void)
 
   return waitpid(pid, status, options);
 }
+
+int
+sys_getPriority(void)
+{
+
+}
+
+int
+sys_setPriority(void)
+{
+  
+}

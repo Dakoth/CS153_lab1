@@ -28,6 +28,9 @@ void exitS(int);
 int waitS(int*);
 int waitpid(int, int*, int);
 
+//Lab 2
+int getPriority(void);
+int setPriority(int);
 
 // ulib.c
 int stat(const char*, struct stat*);

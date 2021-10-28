@@ -135,6 +135,9 @@ static int (*syscalls[])(void) = {
 [SYS_waitS]   sys_waitS,
 [SYS_waitpid] sys_waitpid,
 //lol bruh 
+
+[SYS_getPriority] sys_getPriority, //Lab 2
+[SYS_setPriority] sys_setPriority,
 };
 
 void
