@@ -425,7 +425,7 @@ scheduler(void)
   struct proc *p;
   struct cpu *c = mycpu();
 
-  //int currPrio = 30;    //LAB 2 
+  int lowPrio = 31;    //LAB 2 
 
   c->proc = 0;
   
@@ -436,34 +436,43 @@ scheduler(void)
     //LAB 2, we want to find the highest priority process using a similar for loop
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);    
+
+    //if the current prio is larger than the given one, chagne it? //LAB 2 
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if (p->state == RUNNABLE && p->priority < lowPrio) {
+        lowPrio = p->priority;
+      }
+    }
 
 
-      
 
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
 
-      //if(p->priority > currPrio) {  //LAB 2 
+      //Handles aging?
+      
+      if(p->priority != lowPrio) {  //LAB 2 
         //currPrio = p->priority;
+        if (p->priority > 0) {
+          p->priority--;
+        }
+      }
+      //*/
 
+      // Switch to chosen process.  It is the process's job
+      // to release ptable.lock and then reacquire it
+      // before jumping back to us.
+      c->proc = p;
+      switchuvm(p);
+      p->state = RUNNING;
 
-      //} 
-        // Switch to chosen process.  It is the process's job
-        // to release ptable.lock and then reacquire it
-        // before jumping back to us.
-        c->proc = p;
-        switchuvm(p);
-        p->state = RUNNING;
+      swtch(&(c->scheduler), p->context);
+      switchkvm();
 
-        swtch(&(c->scheduler), p->context);
-        switchkvm();
-
-        // Process is done running for now.
-        // It should have changed its p->state before coming back.
-        c->proc = 0;
-
-      //}     
+      // Process is done running for now.
+      // It should have changed its p->state before coming back.
+      c->proc = 0;       
     }
     release(&ptable.lock);
 
