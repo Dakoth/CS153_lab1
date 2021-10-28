@@ -145,11 +145,11 @@ sys_waitpid(void)
 int
 sys_getPriority(void)
 {
-
+  return getPriority();
 }
 
 int
 sys_setPriority(void)
 {
-  
+  return setPriority();
 }
