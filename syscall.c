@@ -108,6 +108,9 @@ extern int sys_exitS(void);
 extern int sys_waitS(void);
 extern int sys_waitpid(void);
 
+extern int sys_getPriority(void);
+extern int sys_setPriority(void);
+
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
 [SYS_exit]    sys_exit,

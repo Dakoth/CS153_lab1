@@ -151,5 +151,11 @@ sys_getPriority(void)
 int
 sys_setPriority(void)
 {
-  return setPriority();
+  int prio; 
+
+  if (argint(0, &prio) < 0) {
+    return -1;
+  }
+
+  return setPriority(prio);
 }
