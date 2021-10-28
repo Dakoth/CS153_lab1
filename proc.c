@@ -457,6 +457,8 @@ scheduler(void)
         if (p->priority > 0) {
           p->priority--;
         }
+
+        continue;
       }
       //*/
 
