@@ -34,9 +34,10 @@ int main(int argc, char *argv[])
 
 		setPriority(30-10*i);		//changed to match our syntax
 		for (j=0;j<50000;j++) {
-			for(k=0;k<1000;k++) {
+			for(k=0;k<1000;k++) { 
 				asm("nop"); }}
-		printf(1, "\n child# %d with priority %d has finished! \n",getpid(),30-10*i);		
+		printf(1, "\n child# %d with priority %d has finished! \n",getpid(),30-10*i);	
+		printf(1, "\n child# %d has priority %d after finishing \n",getpid(), getPriority());//TEST
 		exit();
         }
         else {

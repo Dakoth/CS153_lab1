@@ -437,10 +437,11 @@ scheduler(void)
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);    
 
-    //if the current prio is larger than the given one, change it //LAB 2 
+    //LAB 2 
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if (p->state == RUNNABLE && p->priority < lowPrio) {
         lowPrio = p->priority;
+        //cprintf("%d", lowPrio);
       }
     }
 
@@ -455,6 +456,7 @@ scheduler(void)
         //currPrio = p->priority;
         if (p->priority > 0) {
           p->priority--;
+          //cprintf("%d", p->priority);
         }
         continue;
       }
