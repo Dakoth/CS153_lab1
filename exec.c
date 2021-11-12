@@ -74,7 +74,7 @@ exec(char *path, char **argv)
   sp = sz;
   */
         //lab 3 
-  if((sz = allocuvm(pgdir, sp - PGSIZE, sp)) == 0)
+  if((allocuvm(pgdir, sp - PGSIZE, sp)) == 0)
     goto bad;
   curproc->stackPages = 1;
 
