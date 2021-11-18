@@ -81,12 +81,12 @@ trap(struct trapframe *tf)
   //lab 3 
   case T_PGFLT: ;
   uint regCR2 = rcr2();
-    if (f >KERNBASE-1){
+    if (regCR2 >KERNBASE-1){
 	  cprintf("from trap access > KERNBASE"); //CHANGE PRINT STATEMENTS
 	  exit();
 	}
   regCR2 = PGROUNDDOWN(regCR2);
-  if (allocuvm(myproc()->pgdir, f, f + PGSIZE) == 0) {
+  if (allocuvm(myproc()->pgdir, regCR2, regCR2 + PGSIZE) == 0) {
     cprintf("case T_PGFLT from trap.c: allocuvm failed. Number of current allocated pages: %d\n", myproc()->stackPages);
     exit();
   }
