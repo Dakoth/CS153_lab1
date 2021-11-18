@@ -79,21 +79,20 @@ trap(struct trapframe *tf)
     break;
 
   //lab 3 
-  /*
   case T_PGFLT: ;
-  uint f = rcr2();
+  uint regCR2 = rcr2();
     if (f >KERNBASE-1){
-	  cprintf("from trap access > KERNBASE");
+	  cprintf("from trap access > KERNBASE"); //CHANGE PRINT STATEMENTS
 	  exit();
 	}
-    f = PGROUNDDOWN(f);
-    if (allocuvm(myproc()->pgdir, f, f + PGSIZE) == 0) {
-      cprintf("case T_PGFLT from trap.c: allocuvm failed. Number of current allocated pages: %d\n", myproc()->stackPages);
-      exit();
-    }
-    myproc()->stackPages++;
-    cprintf("case T_PGFLT from trap.c: allocuvm succeeded. Number of pages allocated: %d\n", myproc()->stackPages);
-    break;
+  regCR2 = PGROUNDDOWN(regCR2);
+  if (allocuvm(myproc()->pgdir, f, f + PGSIZE) == 0) {
+    cprintf("case T_PGFLT from trap.c: allocuvm failed. Number of current allocated pages: %d\n", myproc()->stackPages);
+    exit();
+  }
+  myproc()->stackPages++;
+  cprintf("case T_PGFLT from trap.c: allocuvm succeeded. Number of pages allocated: %d\n", myproc()->stackPages);
+  break;
 */
 
   //PAGEBREAK: 13
