@@ -79,7 +79,7 @@ trap(struct trapframe *tf)
     break;
 
   //lab 3 
-  case T_PGFLT:
+  case T_PGFLT: ;
   uint regCR2 = rcr2();
   if (regCR2 > KERNBASE-1){
 	  exit();
