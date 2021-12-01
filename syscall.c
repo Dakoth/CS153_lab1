@@ -17,16 +17,10 @@
 int
 fetchint(uint addr, int *ip)
 {
-  //struct proc *curproc = myproc(); //lab3
+  struct proc *curproc = myproc();
 
-  /*
   if(addr >= curproc->sz || addr+4 > curproc->sz)
     return -1;
-
-    */
-  if(addr >= (KERNBASE - 1) || addr+4 > (KERNBASE - 1)) //LAB 3
-    return -1;
-
   *ip = *(int*)(addr);
   return 0;
 }
@@ -38,12 +32,12 @@ int
 fetchstr(uint addr, char **pp)
 {
   char *s, *ep;
-  //struct proc *curproc = myproc(); //lab 3
+  struct proc *curproc = myproc();
 
-  if(addr >= (KERNBASE - 1)) //LAB3
+  if(addr >= curproc->sz)
     return -1;
   *pp = (char*)addr;
-  ep = (char*)(KERNBASE - 1);    //lab 3
+  ep = (char*)curproc->sz;
   for(s = *pp; s < ep; s++){
     if(*s == 0)
       return s - *pp;
@@ -65,11 +59,11 @@ int
 argptr(int n, char **pp, int size)
 {
   int i;
-  //struct proc *curproc = myproc(); //lab 3
+  struct proc *curproc = myproc();
  
   if(argint(n, &i) < 0)
     return -1;
-  if(size < 0 || (uint)i >= (KERNBASE - 1) || (uint)i+size > (KERNBASE - 1))  //LAB 3
+  if(size < 0 || (uint)i >= curproc->sz || (uint)i+size > curproc->sz)
     return -1;
   *pp = (char*)i;
   return 0;
@@ -110,12 +104,8 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 
-extern int sys_exitS(void);
-extern int sys_waitS(void);
-extern int sys_waitpid(void);
-
-extern int sys_getPriority(void);
-extern int sys_setPriority(void);
+extern int sys_shm_open(void);
+extern int sys_shm_close(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -139,14 +129,8 @@ static int (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
-
-[SYS_exitS]   sys_exitS, //Lab 1 
-[SYS_waitS]   sys_waitS,
-[SYS_waitpid] sys_waitpid,
-//lol bruh 
-
-[SYS_getPriority] sys_getPriority, //Lab 2
-[SYS_setPriority] sys_setPriority,
+[SYS_shm_open] sys_shm_open,
+[SYS_shm_close] sys_shm_close
 };
 
 void
